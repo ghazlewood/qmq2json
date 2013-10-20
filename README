@@ -1,0 +1,10 @@
+Qmail Queue Stats to JSON
+-------------------------
+
+Quick script to read the contents of qmhandle.pl and
+export the results to json for reading by NodePing
+
+Requires a single line added to /etc/sudoers
+
+apache  ALL = NOPASSWD: /usr/bin/qmhandle.pl
+
