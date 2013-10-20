@@ -1,6 +1,10 @@
 <?php
 
 // Script to export qmail queue size to json
+//
+// requires the following added to sudoers
+//
+// apache  ALL = NOPASSWD: /usr/bin/qmhandle.pl
 
 $qmhandle = 'sudo /usr/bin/qmhandle.pl -s';
 exec($qmhandle, $output);
