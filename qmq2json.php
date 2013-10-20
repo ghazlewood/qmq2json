@@ -2,17 +2,16 @@
 
 // Script to export qmail queue size to json
 
-$qmhandle = '/usr/bin/qmhandle.pl';
-
-$statistics = array(
-	'total' => 'Total messages',
-	'local' => 'Messages with local recipients',
-	'remote' => 'Messages with remote recipients'
-);
+$qmhandle = 'sudo /usr/bin/qmhandle.pl';
+exec($qmhandle, $output);
 
 foreach($statistics as $stat => $stat_label) {
-	exec($qmhandle . " -s | grep \"" . $stat_label . "\" | awk -F \":\" '{print $2}' | sed 's/ //g'", $output);
-	$result[$stat] = $output;
+        foreach($output as $line) {
+                if (stristr($line, $stat_label)) {
+                        $result = explode(':', $line);
+                        $results[$stat] = $result[1];
+                }
+        }
 }
 
-print json_encode(array( 'qmail_queue' =>$result) );
+print json_encode(array( 'qmail_queue' => $result) );
