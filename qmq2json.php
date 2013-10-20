@@ -11,7 +11,8 @@ $statistics = array(
 );
 
 foreach($statistics as $stat => $stat_label) {
-	$result[$stat] = system($qmhandle . " -s | grep \"" . $stat_label . "\" | awk -F \":\" '{print $2}' | sed 's/ //g'");
+	exec($qmhandle . " -s | grep \"" . $stat_label . "\" | awk -F \":\" '{print $2}' | sed 's/ //g'", $output);
+	$result[$stat] = $output;
 }
 
 print json_encode(array( 'qmail_queue' =>$result) );
