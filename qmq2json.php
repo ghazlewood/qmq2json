@@ -15,9 +15,9 @@ foreach($statistics as $stat => $stat_label) {
         foreach($output as $line) {
                 if (stristr($line, $stat_label)) {
                         $result = explode(':', $line);
-                        $results[$stat] = $result[1];
+                        $results[$stat] = trim($result[1]);
                 }
         }
 }
 
-print json_encode(array( 'qmail_queue' => $result) );
+print json_encode(array( 'qmail_queue' => $results) );
