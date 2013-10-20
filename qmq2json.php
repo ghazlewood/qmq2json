@@ -10,10 +10,8 @@ $statistics = array(
 	'remote' => 'Messages with remote recipients'
 );
 
-
 foreach($statistics as $stat => $stat_label) {
-	$result[$stat] = $qmhandle . " -s | grep \"" . $stat_label . "\" | awk -F \":\" '{print $2}' | sed 's/ //g'";
+	$result[$stat] = system($qmhandle . " -s | grep \"" . $stat_label . "\" | awk -F \":\" '{print $2}' | sed 's/ //g'");
 }
 
-//print json_encode(array( 'qmail_queue' =>$result) );
-var_dump($result);
+print json_encode(array( 'qmail_queue' =>$result) );
