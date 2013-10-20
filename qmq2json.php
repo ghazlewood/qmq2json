@@ -23,5 +23,5 @@ foreach($statistics as $stat => $stat_label) {
                 }
         }
 }
-
+header('Content-Type: application/json');
 print json_encode(array( 'qmail_queue' => $results) );
